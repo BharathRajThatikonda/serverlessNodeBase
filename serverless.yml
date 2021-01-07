@@ -1,0 +1,30 @@
+service:
+  name: sls-Nodejs  # Your Serverless Service Name
+
+frameworkVersion: '2'
+
+plugins:
+  - serverless-bundle
+  - serverless-pseudo-parameters
+
+provider:
+  name: aws  # Your Cloud Provider
+  runtime: nodejs12.x  # Your programming Lang Version Runtime
+  memorySize: 256    # Your Lambda service memory size
+  stage: ${opt:stage, 'dev'}   # your deployment stage
+  region: us-east-1      # lambda region
+package:
+  include:
+#    - include-me.js
+#    - include-me-dir/**
+  exclude:
+#    - exclude-me.js
+#    - exclude-me-dir/** 
+functions:
+  app:     # function Name
+    handler: src/app/hello.handler    # fucntion path 
+    events:
+      - http:                         # API Gateway
+          method: GET
+          path: /hello
+          cors: true
