@@ -1,7 +1,4 @@
-service:
-  name: sls-Nodejs  # Your Serverless Service Name
-
-frameworkVersion: '2'
+service: sls-Nodejs   # Your Serverless Service Name
 
 plugins:
   - serverless-bundle
@@ -13,16 +10,10 @@ provider:
   memorySize: 256    # Your Lambda service memory size
   stage: ${opt:stage, 'dev'}   # your deployment stage
   region: us-east-1      # lambda region
-package:
-  include:
-#    - include-me.js
-#    - include-me-dir/**
-  exclude:
-#    - exclude-me.js
-#    - exclude-me-dir/** 
+
 functions:
   app:     # function Name
-    handler: src/app/hello.handler    # fucntion path 
+    handler: src/app.handler    # fucntion path 
     events:
       - http:                         # API Gateway
           method: GET
